@@ -1,0 +1,1 @@
+{"cleanUrls":true,"trailingSlash":true,"headers":[{"source":"/dashboard/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"}]}]}
