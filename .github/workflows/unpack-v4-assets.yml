@@ -17,17 +17,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Rebuild artwork package
+      - name: Unpack optimized artwork
         shell: bash
         run: |
           set -euo pipefail
-          cat .asset-staging/v4part_* > /tmp/v4assets.b64
-          base64 -d /tmp/v4assets.b64 > /tmp/v4assets.zip
+          test -f .asset-staging/v4-media.zip
           mkdir -p images
-          unzip -o /tmp/v4assets.zip -d images
+          unzip -o .asset-staging/v4-media.zip -d images
           rm -rf .asset-staging
 
-      - name: Commit rebuilt images
+      - name: Commit artwork files
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
