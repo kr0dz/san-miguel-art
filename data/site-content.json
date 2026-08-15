@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "seo": {
+    "title": "Arte Original y Murales en San Miguel de Allende | SMArt",
+    "description": "Obra original y murales en San Miguel de Allende. Descubre el trabajo de Fernando Castañeda, consulta disponibilidad y solicita encargos personalizados."
+  },
+  "hero": {
+    "enabled": true,
+    "mode": "single",
+    "eyebrow": "Arte original · San Miguel de Allende",
+    "title": "Obra con presencia. Hecha para quedarse.",
+    "body": "Descubre obra original y murales de Fernando Castañeda. Consulta disponibilidad, precio o plantea un encargo creado especialmente para tu espacio.",
+    "primaryLabel": "Ver obra",
+    "secondaryLabel": "Encargar una obra",
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/hero.webp",
+        "alt": "Mural de San Miguel de Allende de Fernando Castañeda",
+        "caption": "Fernando Castañeda · Mural en San Miguel de Allende"
+      }
+    ]
+  },
+  "works": {
+    "enabled": true,
+    "mode": "gallery",
+    "eyebrow": "Selección",
+    "title": "Obras para vivir con ellas.",
+    "body": "Una selección breve para mirar cada pieza con calma y preguntar directamente por la obra que te interesa.",
+    "items": [
+      {
+        "title": "Paisaje al atardecer",
+        "kicker": "Paisaje · Mural",
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/atardecer-board.webp",
+        "alt": "Paisaje al atardecer de Fernando Castañeda",
+        "cta": "Consultar disponibilidad y precio"
+      },
+      {
+        "title": "Gran formato",
+        "kicker": "Composición contemporánea",
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/abstract-board.webp",
+        "alt": "Composición contemporánea de Fernando Castañeda",
+        "cta": "Consultar disponibilidad y precio"
+      },
+      {
+        "title": "Vista de San Miguel",
+        "kicker": "Arquitectura · Mural",
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/parroquia-board.webp",
+        "alt": "Mural inspirado en San Miguel de Allende de Fernando Castañeda",
+        "cta": "Consultar disponibilidad y precio"
+      }
+    ]
+  },
+  "murals": {
+    "enabled": true,
+    "mode": "gallery",
+    "eyebrow": "Murales por encargo",
+    "title": "Tu espacio puede ser la obra.",
+    "body": "Intervenciones para residencias, hoteles, restaurantes y espacios comerciales en San Miguel de Allende.",
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/interior-board.webp",
+        "alt": "Proceso de mural interior de Fernando Castañeda",
+        "caption": "Proceso"
+      },
+      {
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/interior-board.webp",
+        "alt": "Mural interior terminado de Fernando Castañeda",
+        "caption": "Resultado"
+      }
+    ]
+  },
+  "artist": {
+    "enabled": true,
+    "mode": "single",
+    "eyebrow": "El artista",
+    "title": "Fernando Castañeda",
+    "body": "Su trabajo cruza paisaje, arquitectura, ornamentación e intervenciones de gran formato realizadas directamente en espacios habitados.",
+    "images": [
+      {
+        "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/artist.webp",
+        "alt": "Artista trabajando en una intervención mural",
+        "caption": "Proceso de trabajo"
+      }
+    ]
+  },
+  "videos": {
+    "enabled": true,
+    "eyebrow": "Proceso en video",
+    "title": "Ver el trabajo cobrar vida.",
+    "body": "Procesos, obra en sitio y proyectos de Fernando Castañeda.",
+    "items": []
+  }
+}
