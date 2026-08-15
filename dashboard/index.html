@@ -1,1 +1,54 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Dashboard de videos | SMArt</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/styles.css"></head><body><main class="dashboard"><div class="container"><div class="dash-head"><div><div class="eyebrow">Administración privada</div><h1>Videos · Fernando Castañeda</h1></div><a class="btn" href="/artistas/fernando-castaneda/">Ver perfil</a></div><div class="dash-grid"><aside class="panel"><h2>Conectar</h2><p class="dash-help">Usa un token de GitHub con permiso de <strong>Contents: Read and write</strong> únicamente para el repositorio <strong>kr0dz/san-miguel-art</strong>. El token se guarda en <strong>sessionStorage</strong> y desaparece al cerrar la sesión del navegador; nunca se publica en el sitio.</p><div class="token-row"><input id="token" type="password" autocomplete="off" placeholder="github_pat_…"><button class="btn dark" id="connect">Conectar</button></div><div id="status" class="dash-status"></div><hr style="border:0;border-top:1px solid var(--line);margin:28px 0"><h2>Nuevo video</h2><form id="videoForm" class="video-editor"><label>Título<input required id="title" placeholder="Ej. Proceso mural en San Miguel"></label><label>URL<input required id="url" placeholder="YouTube, Vimeo o URL directa .mp4"></label><label>Descripción<textarea id="description" placeholder="Texto opcional"></textarea></label><label>Orden<input id="order" type="number" value="10"></label><button class="btn dark" type="submit">Agregar video</button></form></aside><section class="panel"><h2>Videos publicados</h2><p class="dash-help">Cada vez que guardes, se hará un commit automático en GitHub. Si Vercel está conectado al repositorio, el cambio disparará el despliegue.</p><div id="videosList"><div class="empty">Conecta GitHub para administrar los videos.</div></div></section></div></div></main><script src="/dashboard/dashboard.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>CMS privado | SMArt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ede4;--paper:#fffaf3;--ink:#171512;--mut:#756f67;--gold:#9c7548;--line:#d9d0c4;--danger:#9c3328;--ok:#2f7149;--ser:'Instrument Serif',serif;--sans:'DM Sans',sans-serif}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans)}button,input,textarea,select{font:inherit}button{cursor:pointer}a{color:inherit}.hidden{display:none!important}.btn{border:1px solid var(--ink);background:transparent;color:var(--ink);padding:11px 15px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.btn.dark{background:var(--ink);color:#fff}.btn.ghost{border-color:var(--line)}.btn.danger{border-color:#d8aaa5;color:var(--danger)}.login{min-height:100vh;display:grid;place-items:center;padding:22px}.login-card{width:min(480px,100%);background:var(--paper);border:1px solid var(--line);padding:44px}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);font-weight:600}.login h1,.brand,.workspace h1,.editor h2,.media-title{font-family:var(--ser);font-weight:400}.login h1{font-size:54px;line-height:.9;margin:12px 0 18px}.login p{color:var(--mut);line-height:1.65}.field{display:grid;gap:7px;margin:16px 0}.field>span,.micro{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--mut)}input,textarea,select{width:100%;border:1px solid var(--line);background:#fff;padding:11px 12px;color:var(--ink)}textarea{min-height:112px;resize:vertical}.msg{margin-top:12px;font-size:13px}.msg.error{color:var(--danger)}.msg.ok{color:var(--ok)}.shell{min-height:100vh;display:grid;grid-template-columns:248px 1fr}.sidebar{position:sticky;top:0;height:100vh;background:#151411;color:#fff;padding:28px 20px;display:flex;flex-direction:column}.brand{font-size:40px}.brand-sub{font-size:9px;text-transform:uppercase;letter-spacing:.16em;color:#a9a39b;margin-top:3px}.navtabs{display:grid;gap:5px;margin-top:34px}.navtabs button{border:0;background:transparent;color:#c7c1b8;text-align:left;padding:11px 12px;font-size:13px}.navtabs button.active{background:#2a2824;color:#fff}.side-bottom{margin-top:auto;display:grid;gap:10px}.side-bottom a{font-size:12px;color:#c7c1b8;text-decoration:none}.workspace{min-width:0}.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:14px;padding:18px 28px;background:rgba(242,237,228,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.topbar h1{font-size:32px;margin:0}.topbar .spacer{flex:1}.save-state{font-size:12px;color:var(--mut)}.editor{padding:34px 32px 90px;max-width:1200px;margin:auto}.editor-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:26px}.editor h2{font-size:54px;line-height:.9;margin:7px 0}.editor-head p{max-width:600px;color:var(--mut);line-height:1.6;margin:0}.panel{background:var(--paper);border:1px solid var(--line);padding:24px;margin-bottom:18px}.panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.switchrow{display:flex;align-items:center;justify-content:space-between;gap:20px}.switchrow input{width:auto}.mode-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}.media-list{display:grid;gap:14px;margin-top:18px}.media-card{display:grid;grid-template-columns:170px 1fr;gap:18px;border:1px solid var(--line);background:#fff;padding:12px}.thumb{height:150px;background:#ddd;overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover}.media-fields{display:grid;gap:9px}.media-actions{display:flex;gap:7px;flex-wrap:wrap}.media-actions .btn{padding:8px 10px;font-size:9px}.media-title{font-size:28px;margin:0}.uploadbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}.upload-input{display:none}.works-list{display:grid;gap:14px}.work-card{border:1px solid var(--line);background:#fff;padding:13px;display:grid;grid-template-columns:180px 1fr;gap:16px}.work-card img{width:180px;height:170px;object-fit:cover;background:#ddd}.work-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}.work-fields .wide{grid-column:1/-1}.video-row{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;border-bottom:1px solid var(--line);padding:14px 0}.video-row:first-child{border-top:1px solid var(--line)}.video-info strong{font:25px var(--ser)}.video-info small{display:block;color:var(--mut);margin-top:3px;overflow-wrap:anywhere}.statusbox{padding:14px 16px;background:#eee5d8;color:#5b534a;font-size:12px;line-height:1.65}.statusbox strong{color:var(--ink)}.setup{border-left:3px solid var(--gold)}.preview-note{color:var(--mut);font-size:12px;margin-top:10px}.danger-zone{border-color:#dcb8b3}.mobile-nav{display:none}.loader{min-height:50vh;display:grid;place-items:center;color:var(--mut)}@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:flex;gap:8px;overflow:auto;padding:12px 16px;background:#151411;position:sticky;top:0;z-index:12}.mobile-nav button{white-space:nowrap;border:1px solid #ffffff30;background:transparent;color:#ddd;padding:8px 10px}.mobile-nav button.active{background:#fff;color:#111}.topbar{top:53px;padding:14px 16px}.topbar h1{display:none}.editor{padding:25px 16px 90px}.panel-grid,.mode-row{grid-template-columns:1fr}.media-card,.work-card{grid-template-columns:1fr}.thumb{height:260px}.work-card img{width:100%;height:260px}.work-fields{grid-template-columns:1fr}.work-fields .wide{grid-column:auto}.editor h2{font-size:46px}.login-card{padding:30px 24px}}
+</style>
+</head>
+<body>
+<section id="loginView" class="login">
+  <div class="login-card">
+    <div class="eyebrow">Administración privada</div>
+    <h1>SMArt CMS</h1>
+    <p>Administra imágenes, galerías, textos, obras y videos. La credencial de GitHub permanece únicamente en el servidor.</p>
+    <form id="loginForm">
+      <label class="field"><span>Contraseña de administrador</span><input id="adminPassword" type="password" autocomplete="current-password" required></label>
+      <button class="btn dark" type="submit">Entrar</button>
+    </form>
+    <div id="loginMessage" class="msg"></div>
+  </div>
+</section>
+
+<section id="appView" class="hidden">
+  <div class="mobile-nav" id="mobileTabs"></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div><div class="brand">SMArt</div><div class="brand-sub">San Miguel de Allende · CMS</div></div>
+      <div class="navtabs" id="desktopTabs"></div>
+      <div class="side-bottom">
+        <a href="/" target="_blank" rel="noopener">Ver sitio ↗</a>
+        <button class="btn ghost" id="logoutBtn">Cerrar sesión</button>
+      </div>
+    </aside>
+    <main class="workspace">
+      <div class="topbar">
+        <h1>Editor de contenido</h1>
+        <span id="saveState" class="save-state"></span>
+        <div class="spacer"></div>
+        <a class="btn ghost" href="/" target="_blank" rel="noopener">Vista previa</a>
+        <button class="btn dark" id="saveBtn">Guardar cambios</button>
+      </div>
+      <div id="editor" class="editor"><div class="loader">Cargando contenido…</div></div>
+    </main>
+  </div>
+</section>
+<script src="/dashboard/dashboard.js"></script>
+</body>
+</html>
