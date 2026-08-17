@@ -1,0 +1,55 @@
+name: Install verified HQ artwork assets
+on:
+  push:
+    paths:
+      - '.hq-upload-v3/READY'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild and verify HQ package
+        shell: bash
+        run: |
+          set -euo pipefail
+          for n in $(seq -w 0 10); do
+            test -s ".hq-upload-v3/part_${n}" || { echo "Missing part_${n}"; exit 1; }
+          done
+          cat .hq-upload-v3/part_{00..10} > /tmp/hq-assets.b64
+          base64 --decode /tmp/hq-assets.b64 > /tmp/hq-assets.zip
+          echo '7e8d631635cca9c3c80efe1aba74da3a09f74f36c8b0f90214de64933b78797e  /tmp/hq-assets.zip' | sha256sum -c -
+          unzip -t /tmp/hq-assets.zip
+          rm -rf /tmp/hq-extracted
+          mkdir -p /tmp/hq-extracted assets/images/fernando
+          unzip -o /tmp/hq-assets.zip -d /tmp/hq-extracted
+          echo 'Package contents:'
+          find /tmp/hq-extracted -maxdepth 3 -type f -printf '%p %s bytes\n'
+          for f in hero.webp atardecer-board.webp abstract-board.webp parroquia-board.webp artist.webp interior-before.webp interior-after.webp interior-board.webp; do
+            src="$(find /tmp/hq-extracted -type f -name "$f" | head -n 1)"
+            test -n "$src" || { echo "Missing $f in package"; exit 1; }
+            bytes="$(stat -c%s "$src")"
+            test "$bytes" -ge 25000 || { echo "$f is too small: $bytes bytes"; exit 1; }
+            cp -f "$src" "assets/images/fernando/$f"
+          done
+          echo 'Installed files:'
+          for f in assets/images/fernando/{hero.webp,atardecer-board.webp,abstract-board.webp,parroquia-board.webp,artist.webp,interior-before.webp,interior-after.webp,interior-board.webp}; do
+            file "$f"
+            stat -c '%n %s bytes' "$f"
+          done
+          rm -rf .hq-upload-v3
+      - name: Commit verified images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/images/fernando .hq-upload-v3
+          if ! git diff --cached --quiet; then
+            git commit -m 'Install verified high-resolution artwork assets'
+            git push
+          fi
