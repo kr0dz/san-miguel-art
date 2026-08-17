@@ -3,6 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/use-existing-hq-assets.mjs && node scripts/build.mjs && node scripts/copy-hq-images.mjs && node scripts/patch-home.mjs && node scripts/hq-home.mjs && node scripts/remove-reference-crops.mjs && node scripts/finalize-reference-layout.mjs && node scripts/marketplace.mjs"
+    "build": "node scripts/use-existing-hq-assets.mjs && node scripts/build.mjs && node scripts/copy-hq-images.mjs && node scripts/patch-home.mjs && node scripts/hq-home.mjs && node scripts/remove-reference-crops.mjs && node scripts/finalize-reference-layout.mjs && node scripts/marketplace.mjs && node scripts/marketplace-finalize.mjs"
   }
 }
