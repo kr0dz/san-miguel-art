@@ -1,1 +1,15 @@
-{"cleanUrls":true,"trailingSlash":true,"headers":[{"source":"/dashboard/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow"}]}]}
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/dashboard/(.*)",
+      "headers": [
+        {"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"},
+        {"key":"Cache-Control","value":"no-store"}
+      ]
+    }
+  ]
+}
