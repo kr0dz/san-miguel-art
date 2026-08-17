@@ -1,0 +1,46 @@
+name: Install real HQ artwork v3
+on:
+  push:
+    paths:
+      - '.hq-upload-v3/READY'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild HQ package
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .hq-upload-v3/part_* > /tmp/hq.b64
+          base64 -d /tmp/hq.b64 > /tmp/hq.zip
+          unzip -t /tmp/hq.zip
+          rm -rf /tmp/hq && mkdir -p /tmp/hq
+          unzip -q /tmp/hq.zip -d /tmp/hq
+          mkdir -p assets/images/fernando
+          cp /tmp/hq/sunset.webp assets/images/fernando/hero.webp
+          cp /tmp/hq/sunset.webp assets/images/fernando/atardecer-board.webp
+          cp /tmp/hq/abstract.webp assets/images/fernando/abstract-board.webp
+          cp /tmp/hq/abstract.webp assets/images/fernando/sign-temp.webp
+          cp /tmp/hq/parroquia.webp assets/images/fernando/parroquia-board.webp
+          cp /tmp/hq/parroquia.webp assets/images/fernando/place.webp
+          cp /tmp/hq/interior-before.webp assets/images/fernando/interior-before.webp
+          cp /tmp/hq/interior-after.webp assets/images/fernando/interior-after.webp
+          cp /tmp/hq/interior-after.webp assets/images/fernando/interior-board.webp
+          cp /tmp/hq/artist.webp assets/images/fernando/artist.webp
+          rm -rf .hq-upload-v3
+      - name: Commit HQ originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/images/fernando .hq-upload-v3
+          if ! git diff --cached --quiet; then
+            git commit -m 'Replace compressed artwork with real HQ originals'
+            git push
+          fi
