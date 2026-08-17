@@ -1,0 +1,58 @@
+name: Restore historical HQ AVIF assets
+on:
+  push:
+    paths:
+      - '.restore-hq-history'
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore exact AVIF blobs from reachable git history
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            images/fernando-castaneda-mural-contemporaneo.avif
+            images/fernando-castaneda-muralista.avif
+            images/fernando-castaneda-paisaje-atardecer.avif
+            images/fernando-castaneda-parroquia-san-miguel.avif
+            images/mural-interior-antes.avif
+            images/mural-interior-terminado.avif
+          )
+          mkdir -p images
+          for p in "${files[@]}"; do
+            found=''
+            while read -r c; do
+              if git cat-file -e "$c:$p" 2>/dev/null; then
+                found="$c"
+                break
+              fi
+            done < <(git rev-list --all -- "$p")
+            if [ -z "$found" ]; then
+              echo "No historical blob found for $p" >&2
+              exit 1
+            fi
+            git show "$found:$p" > "$p"
+            echo "$p restored from $found ($(stat -c%s "$p") bytes)"
+          done
+          test "$(stat -c%s images/fernando-castaneda-mural-contemporaneo.avif)" -gt 40000
+          test "$(stat -c%s images/fernando-castaneda-muralista.avif)" -gt 40000
+          test "$(stat -c%s images/fernando-castaneda-paisaje-atardecer.avif)" -gt 50000
+          test "$(stat -c%s images/fernando-castaneda-parroquia-san-miguel.avif)" -gt 100000
+          test "$(stat -c%s images/mural-interior-antes.avif)" -gt 30000
+          test "$(stat -c%s images/mural-interior-terminado.avif)" -gt 40000
+      - name: Commit restored HQ assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .restore-hq-history
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add images .restore-hq-history
+          git commit -m 'Restore original HQ AVIF artwork from git history'
+          git push
