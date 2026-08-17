@@ -1,0 +1,47 @@
+name: Install HQ artwork
+on:
+  push:
+    paths:
+      - '.hq-ready'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore HQ artwork blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/images/fernando
+          restore() {
+            local sha="$1" out="$2"
+            gh api "repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" --jq '.content' | tr -d '\n' | base64 -d > "$out"
+            test -s "$out"
+          }
+          restore 9c61fd7e11e73f6158423d7c22188f5ed1e19532 assets/images/fernando/hero.webp
+          restore a7878ba2a843a4d40c36ae59a9441cd98f64ee11 assets/images/fernando/atardecer-board.webp
+          restore 9cca27c3c60723a29a9408e678efd501b5691fed assets/images/fernando/abstract-board.webp
+          restore ad4d31caf4f2a8bddb312575d41976085262767f assets/images/fernando/parroquia-board.webp
+          restore ced72e89ce2fd984e3b18df2ffc9e5c4de02954c assets/images/fernando/artist.webp
+          restore acf04e19260ab945337549bf56ceec1199ca6706 assets/images/fernando/interior-board.webp
+          restore 0f476943ac856c3e9b7a62655b3cf97942f56d04 assets/images/fernando/interior-before.webp
+          restore c42ff44237e8c0fec37cb96bbd048c7fb7d4a402 assets/images/fernando/interior-after.webp
+          file assets/images/fernando/*.webp
+      - name: Commit HQ artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .hq-ready
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/images/fernando .hq-ready
+          if ! git diff --cached --quiet; then
+            git commit -m 'Install high-quality artwork assets [skip ci]'
+            git push
+          fi
