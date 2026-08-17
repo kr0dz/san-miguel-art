@@ -3,15 +3,13 @@ import fs from 'node:fs/promises';
 const file = new URL('../data/site-v5.json', import.meta.url);
 const data = JSON.parse(await fs.readFile(file, 'utf8'));
 
+// Only remap the large public-facing artwork for which we ship verified AVIF files.
+// Smaller process/artist assets remain on their existing local URLs so the CMS keeps working.
 const replacements = {
-  'hero.webp': '/images/fernando-castaneda-paisaje-atardecer.avif',
+  'hero.webp': '/images/fernando-castaneda-parroquia-san-miguel.avif',
   'atardecer-board.webp': '/images/fernando-castaneda-paisaje-atardecer.avif',
   'abstract-board.webp': '/images/fernando-castaneda-mural-contemporaneo.avif',
-  'parroquia-board.webp': '/images/fernando-castaneda-parroquia-san-miguel.avif',
-  'artist.webp': '/images/fernando-castaneda-muralista.avif',
-  'interior-board.webp': '/images/mural-interior-terminado.avif',
-  'interior-before.webp': '/images/mural-interior-antes.avif',
-  'interior-after.webp': '/images/mural-interior-terminado.avif'
+  'parroquia-board.webp': '/images/fernando-castaneda-parroquia-san-miguel.avif'
 };
 
 function mapValue(value) {
@@ -27,4 +25,4 @@ function mapValue(value) {
 }
 
 await fs.writeFile(file, `${JSON.stringify(mapValue(data), null, 2)}\n`);
-console.log('SMArt: legacy compressed artwork URLs mapped to existing HQ AVIF assets.');
+console.log('SMArt: large artwork URLs mapped to verified local AVIF assets.');
