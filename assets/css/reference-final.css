@@ -1,0 +1,113 @@
+/* Final visual pass: match the approved SMArt reference proportions without changing CMS content. */
+:root{--ref-max:1920px;--ref-pad:clamp(28px,4vw,78px)}
+html,body{margin:0;width:100%;overflow-x:hidden}
+body{background:#f4efe7}
+.reference-header,.reference-home,.reference-footer{width:min(100%,var(--ref-max));max-width:var(--ref-max);margin-left:auto;margin-right:auto}
+.reference-header{height:78px;padding-left:var(--ref-pad);padding-right:var(--ref-pad)}
+.reference-header .brand{font-size:44px;min-width:130px}
+.reference-header .nav{gap:clamp(16px,1.7vw,34px);font-size:11px;letter-spacing:.045em}
+.reference-header .nav-quote{min-height:42px;padding:11px 22px;font-size:10px}
+.reference-home .eyebrow{font-size:11px;letter-spacing:.09em}
+
+/* Hero: fixed editorial proportion. Prevent portrait artwork from stretching the entire section. */
+.ref-hero{grid-template-columns:43% 57%;height:clamp(650px,40vw,780px);min-height:0}
+.ref-hero-copy{padding:86px 46px 72px var(--ref-pad);justify-content:center}
+.ref-hero-copy h1{font-size:clamp(72px,6vw,116px);line-height:.89;letter-spacing:-.032em;margin:20px 0 27px;max-width:760px}
+.ref-hero-copy p{max-width:510px;font-size:15px;line-height:1.62}
+.ref-hero-copy .hero-actions{margin-top:30px;gap:14px}
+.ref-hero-copy .button{min-height:46px;padding:12px 22px;font-size:10px}
+.ref-hero-art{height:100%;min-height:0;position:relative}
+.ref-hero-art>.figure,.ref-hero-art .ref-crop,.ref-hero-art .hq-media{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important}
+.ref-hero-art img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center center!important}
+.ref-hero-art:before{width:25%;background:linear-gradient(90deg,var(--ref-paper),rgba(252,248,242,.84) 22%,rgba(252,248,242,.28) 58%,transparent)}
+
+/* Manifesto */
+.manifesto{grid-template-columns:41% 59%;min-height:430px}
+.manifesto-copy{padding:62px 44px 54px var(--ref-pad)}
+.manifesto-copy h2{font-size:clamp(48px,3.6vw,70px);line-height:.95;max-width:610px}
+.manifesto-copy p{max-width:380px;font-size:13px;line-height:1.68}
+.manifesto-copy a,.ref-split-copy a,.artist-copy a,.place-copy a,.transform-copy a,.faq-inline a{font-size:10px}
+.manifesto-art{min-height:430px}
+.manifesto-art .figure{height:100%;width:100%}
+.botanical-hq svg{width:100%;height:100%;display:block}
+
+/* Services */
+.mini-heading{font-size:20px;padding:20px 0 16px}
+.ref-service-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ref-service{min-height:315px;padding:34px 32px 36px}
+.service-icon{width:67px;height:67px;margin-bottom:24px}
+.service-icon svg{width:31px;height:31px}
+.ref-service h3{font-size:27px;line-height:1.02;max-width:290px;margin-bottom:13px}
+.ref-service p{font-size:12px;line-height:1.6;max-width:290px}
+.ref-service>span:last-child{font-size:9px}
+
+/* Portfolio */
+.ref-projects{padding-top:16px;padding-bottom:40px}
+.ref-section-title{height:54px}
+.ref-section-title h2{font-size:20px}.ref-section-title a{font-size:9px}
+.ref-project-grid{gap:10px}
+.ref-project>.figure,.ref-project>.figure:not(.ref-crop) img{aspect-ratio:1/1.02;width:100%;height:auto;object-fit:cover}
+.ref-project>div{padding:13px 10px 7px;gap:5px}
+.ref-project small{font-size:9px}.ref-project strong{font-size:11px}.ref-project button{font-size:9px}
+
+/* Alternating feature blocks */
+.ref-split{min-height:430px}
+.ref-split-copy{padding:48px 42px 42px 18px}
+.sign-block .ref-split-copy{padding-left:18px;padding-right:48px}.hospitality-block .ref-split-copy{padding-left:48px}
+.ref-split-copy h2{font-size:clamp(42px,3.35vw,64px);line-height:.95;max-width:650px}
+.ref-split-copy p{font-size:13px;line-height:1.65;max-width:520px}
+.ref-split-art{min-height:430px;position:relative}
+.ref-split-art>.figure,.ref-split-art>.hq-media{position:absolute!important;inset:0;width:100%!important;height:100%!important;margin:0!important;aspect-ratio:auto!important}
+.ref-split-art img{width:100%!important;height:100%!important;object-fit:cover!important}
+
+/* Before/after */
+.transformation{padding-top:12px;padding-bottom:28px}
+.transformation-grid{grid-template-columns:68% 32%;min-height:350px}
+.ref-before-after,.ref-before-after .figure{height:350px;min-height:350px}
+.ref-before-after .figure{position:absolute!important;top:0;bottom:0;margin:0!important}
+.ref-before-after img{width:100%!important;height:100%!important;object-fit:cover!important}
+.transform-copy{padding:44px 36px 36px 52px}
+.transform-copy h3{font-size:39px;line-height:1.06;max-width:420px}
+
+/* Process */
+.ref-process{padding-bottom:22px}
+.ref-process li{min-height:210px;padding:27px 30px}
+.ref-process b{font-size:52px}.ref-process h3{font-size:20px}.ref-process p{font-size:11px;max-width:255px}
+
+/* Artist / place */
+.artist-grid{grid-template-columns:24% 26% 24% 26%;min-height:355px}
+.artist-photo,.place-photo{min-height:355px;position:relative}
+.artist-photo>.figure,.place-photo>.figure{position:absolute!important;inset:0;width:100%!important;height:100%!important;margin:0!important;aspect-ratio:auto!important}
+.artist-photo img,.place-photo img{width:100%!important;height:100%!important;object-fit:cover!important}
+.artist-copy,.place-copy{padding:42px 34px}
+.artist-copy h2,.place-copy h2{font-size:34px}.artist-copy p,.place-copy p{font-size:11px;line-height:1.6}
+.faq-inline{padding:25px 12px}.faq-inline h2{font-size:30px}
+
+/* CTA/footer */
+.ref-final{padding:43px 24px 46px}
+.ref-final h2{font-size:clamp(48px,4.3vw,82px)}.ref-final p{font-size:11px;margin-bottom:18px}
+.reference-footer{padding-top:24px;padding-bottom:34px}.reference-footer .footer-brand{font-size:42px}.reference-footer .footer-intro p,.footer-columns a{font-size:9px}.footer-columns strong{font-size:8px}
+
+/* Interior pages inherit the same full-width premium scale. */
+body:not(:has(.reference-home)) .hero,body:not(:has(.reference-home)) .section,body:not(:has(.reference-home)) .feature{max-width:var(--ref-max);width:min(100%,var(--ref-max))}
+body:not(:has(.reference-home)) .hero{min-height:600px}
+body:not(:has(.reference-home)) .hero h1{font-size:clamp(62px,5vw,98px)}
+
+@media(max-width:1100px){
+ .reference-header .nav{gap:14px;font-size:10px}.ref-hero{height:620px;grid-template-columns:46% 54%}.ref-hero-copy h1{font-size:70px}
+ .ref-service-grid{grid-template-columns:repeat(2,1fr)}.ref-service:nth-child(2){border-right:0}.ref-service:nth-child(-n+2){border-bottom:1px solid var(--ref-line)}
+ .artist-grid{grid-template-columns:1fr 1fr}.artist-photo,.place-photo{min-height:390px}.artist-copy,.place-copy{min-height:390px}
+}
+@media(max-width:760px){
+ :root{--ref-pad:22px}.reference-header{height:64px}.reference-header .brand{font-size:34px}
+ .ref-hero{display:flex;height:auto;min-height:0;flex-direction:column}.ref-hero-copy{padding:52px 22px 36px}.ref-hero-copy h1{font-size:54px;line-height:.91}.ref-hero-copy p{font-size:13px}.ref-hero-art{height:72vw;min-height:410px}.ref-hero-art:before{width:100%;height:24%;bottom:auto;background:linear-gradient(180deg,var(--ref-paper),transparent)}
+ .manifesto{grid-template-columns:1fr;min-height:0}.manifesto-copy{padding:42px 22px 30px}.manifesto-copy h2{font-size:39px}.manifesto-art{min-height:270px}
+ .ref-service-grid{grid-template-columns:1fr}.ref-service{border-right:0!important;border-bottom:1px solid var(--ref-line);min-height:260px}.ref-service:last-child{border-bottom:0}
+ .ref-project-grid{grid-template-columns:1fr 1fr}.ref-section-title h2{font-size:16px}
+ .ref-split,.ref-split.hospitality-block{display:flex;flex-direction:column;min-height:0;margin:0 22px}.hospitality-block .ref-split-art{order:2}.ref-split-copy,.sign-block .ref-split-copy,.hospitality-block .ref-split-copy{padding:38px 8px 30px}.ref-split-copy h2{font-size:40px}.ref-split-art{position:relative;min-height:340px}.ref-split-art>.figure,.ref-split-art>.hq-media{position:absolute!important}
+ .transformation-grid{grid-template-columns:1fr}.ref-before-after,.ref-before-after .figure{height:270px;min-height:270px}.transform-copy{padding:34px 8px}.transform-copy h3{font-size:31px}
+ .ref-process ol{grid-template-columns:1fr 1fr}.ref-process li:nth-child(2){border-right:0}.ref-process li:nth-child(-n+2){border-bottom:1px solid var(--ref-line)}
+ .artist-grid{grid-template-columns:1fr}.artist-photo,.place-photo,.artist-copy,.place-copy{min-height:330px}.artist-copy h2,.place-copy h2{font-size:31px}
+ .ref-final{margin:0 22px}.reference-footer{grid-template-columns:1fr}.footer-columns{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.ref-project-grid{grid-template-columns:1fr}.ref-process ol{grid-template-columns:1fr}.ref-process li{border-right:0}.footer-columns{grid-template-columns:1fr}}
