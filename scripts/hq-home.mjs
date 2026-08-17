@@ -9,7 +9,7 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function figure(im={},captionOverride=''){
   if(!im?.src)return'';
   const caption=captionOverride||im.caption||'';
-  return `<figure class="figure ref-crop hq-media"><img src="${esc(im.src)}" alt="${esc(im.alt||'')}" loading="lazy">${caption?`<figcaption>${esc(caption)}</figcaption>`:''}</figure>`;
+  return `<figure class="figure ref-crop hq-media"><img src="${esc(im.src)}" alt="${esc(im.alt||'')}" loading="lazy" decoding="async">${caption?`<figcaption>${esc(caption)}</figcaption>`:''}</figure>`;
 }
 
 function localDefault(im,fallback){
@@ -39,8 +39,8 @@ function patchTransformation(html,p){
   const murals=(p.sections||[]).find(s=>s.id==='murals');
   const imgs=murals?.images||[];
   if(!imgs.length)return html;
-  const before=localDefault(imgs[0],'/assets/images/fernando/interior-before.webp');
-  const after=localDefault(imgs[1]||imgs[0],'/assets/images/fernando/interior-after.webp');
+  const before=localDefault(imgs[0],'/images/mural-interior-antes.avif');
+  const after=localDefault(imgs[1]||imgs[0],'/images/mural-interior-terminado.avif');
   const pair=figure(before,'ANTES')+figure(after,'DESPUÉS');
   return html.replace(/(<div class="ref-before-after before-after">)[\s\S]*?(<\/div><div class="transform-copy">)/,(_,a,b)=>a+pair+b);
 }
@@ -77,4 +77,4 @@ async function patchPage(key){
 
 await patchPage('home_es');
 await patchPage('home_en');
-console.log('Applied HQ artwork inside stable SMArt layout boxes.');
+console.log('Applied verified AVIF artwork inside stable SMArt layout boxes.');
