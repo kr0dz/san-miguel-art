@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 780" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración botánica</title>
+  <desc id="desc">Composición botánica de hojas en tonos verde salvia, terracota y arena.</desc>
+  <defs>
+    <linearGradient id="terracotta" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d89a72" stop-opacity=".82"/>
+      <stop offset=".5" stop-color="#b96343" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#8f4d37" stop-opacity=".62"/>
+    </linearGradient>
+    <linearGradient id="sage" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9ea695" stop-opacity=".74"/>
+      <stop offset=".55" stop-color="#6f7869" stop-opacity=".78"/>
+      <stop offset="1" stop-color="#4f584d" stop-opacity=".48"/>
+    </linearGradient>
+    <linearGradient id="olive" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b3aa84" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#6f775f" stop-opacity=".68"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.25"/>
+    </filter>
+  </defs>
+
+  <g fill="none" stroke="#716b5f" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M594 760C628 653 682 561 758 471C853 360 961 253 1119 118" stroke-width="3.2" stroke-opacity=".45"/>
+    <path d="M641 706C562 640 489 589 390 542" stroke-width="2.5" stroke-opacity=".34"/>
+    <path d="M697 611C807 573 922 540 1047 502" stroke-width="2.7" stroke-opacity=".38"/>
+    <path d="M784 458C694 415 611 363 535 302" stroke-width="2.6" stroke-opacity=".34"/>
+    <path d="M888 344C1004 317 1126 271 1241 210" stroke-width="2.6" stroke-opacity=".35"/>
+  </g>
+
+  <g stroke="#756f63" stroke-width="2.2" stroke-opacity=".28">
+    <path d="M407 550C347 503 305 451 274 387C345 389 408 414 456 462C449 502 432 531 407 550Z" fill="url(#sage)"/>
+    <path d="M384 548C341 503 313 461 286 405" fill="none"/>
+    <path d="M522 621C456 602 399 602 333 616C377 658 427 682 489 686C510 666 519 646 522 621Z" fill="url(#olive)"/>
+    <path d="M503 636C451 632 407 638 356 652" fill="none"/>
+    <path d="M537 304C480 257 432 196 407 131C484 144 548 179 595 235C580 263 561 286 537 304Z" fill="url(#sage)"/>
+    <path d="M520 289C476 246 446 199 423 154" fill="none"/>
+    <path d="M688 397C623 353 579 295 557 232C634 249 696 289 740 351C727 369 709 385 688 397Z" fill="url(#olive)"/>
+    <path d="M674 383C632 343 595 299 573 255" fill="none"/>
+    <path d="M744 475C682 449 621 446 555 458C601 505 657 531 720 536C733 516 741 496 744 475Z" fill="url(#sage)"/>
+    <path d="M724 490C671 484 623 486 575 497" fill="none"/>
+    <path d="M930 541C864 519 808 523 748 547C799 587 854 604 914 602C925 583 930 562 930 541Z" fill="url(#olive)"/>
+    <path d="M911 554C858 551 815 557 770 572" fill="none"/>
+    <path d="M1050 500C1120 450 1191 430 1265 435C1223 493 1164 532 1094 549C1074 533 1059 517 1050 500Z" fill="url(#sage)"/>
+    <path d="M1080 513C1134 488 1189 471 1238 462" fill="none"/>
+    <path d="M992 309C1051 246 1113 210 1189 195C1166 261 1124 313 1061 351C1034 344 1011 330 992 309Z" fill="url(#olive)"/>
+    <path d="M1020 321C1070 286 1118 253 1165 222" fill="none"/>
+    <path d="M1217 223C1287 166 1353 137 1420 132C1394 195 1346 245 1279 280C1251 270 1230 251 1217 223Z" fill="url(#sage)"/>
+    <path d="M1245 245C1295 216 1346 184 1392 154" fill="none"/>
+  </g>
+
+  <g stroke="#9c5a40" stroke-width="2.4" stroke-opacity=".32">
+    <path d="M801 456C795 330 819 219 875 97C929 190 948 286 931 388C902 421 861 444 801 456Z" fill="url(#terracotta)"/>
+    <path d="M825 426C838 318 855 221 880 126" fill="none"/>
+    <path d="M872 430C945 388 1013 375 1092 387C1054 445 995 482 922 493C899 478 883 457 872 430Z" fill="url(#terracotta)"/>
+    <path d="M903 449C958 429 1014 414 1066 408" fill="none"/>
+  </g>
+
+  <g opacity=".18" filter="url(#soft)">
+    <ellipse cx="840" cy="312" rx="105" ry="190" fill="#c77a56"/>
+    <ellipse cx="584" cy="410" rx="145" ry="75" fill="#7d8776"/>
+    <ellipse cx="1045" cy="515" rx="185" ry="65" fill="#8d927f"/>
+  </g>
+</svg>
