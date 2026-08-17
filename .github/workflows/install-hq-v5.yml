@@ -1,0 +1,58 @@
+name: Install verified HQ artwork v5
+on:
+  push:
+    paths:
+      - '.hq-upload-v5/READY'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Rebuild and verify image package
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find .hq-upload-v5 -name 'part_*' | wc -l)" -eq 22
+          cat .hq-upload-v5/part_* > /tmp/hq.b64
+          base64 -d /tmp/hq.b64 > /tmp/hq.zip
+          unzip -t /tmp/hq.zip
+          rm -rf /tmp/hq && mkdir /tmp/hq
+          unzip -q /tmp/hq.zip -d /tmp/hq
+          for f in sunset.webp artist.webp abstract.webp interior-after.webp interior-before.webp parroquia.webp; do
+            test -s "/tmp/hq/$f"
+          done
+          test "$(stat -c%s /tmp/hq/sunset.webp)" -gt 50000
+          test "$(stat -c%s /tmp/hq/artist.webp)" -gt 40000
+          test "$(stat -c%s /tmp/hq/abstract.webp)" -gt 45000
+          test "$(stat -c%s /tmp/hq/interior-after.webp)" -gt 30000
+          test "$(stat -c%s /tmp/hq/interior-before.webp)" -gt 17000
+          test "$(stat -c%s /tmp/hq/parroquia.webp)" -gt 100000
+      - name: Replace only image binaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/images/fernando
+          cp /tmp/hq/sunset.webp assets/images/fernando/hero.webp
+          cp /tmp/hq/sunset.webp assets/images/fernando/atardecer-board.webp
+          cp /tmp/hq/abstract.webp assets/images/fernando/abstract-board.webp
+          cp /tmp/hq/abstract.webp assets/images/fernando/sign-temp.webp
+          cp /tmp/hq/parroquia.webp assets/images/fernando/parroquia-board.webp
+          cp /tmp/hq/parroquia.webp assets/images/fernando/place.webp
+          cp /tmp/hq/artist.webp assets/images/fernando/artist.webp
+          cp /tmp/hq/interior-before.webp assets/images/fernando/interior-before.webp
+          cp /tmp/hq/interior-after.webp assets/images/fernando/interior-after.webp
+          cp /tmp/hq/interior-after.webp assets/images/fernando/interior-board.webp
+          rm -rf .hq-upload-v5
+      - name: Commit verified images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/images/fernando .hq-upload-v5
+          git commit -m 'Replace low-resolution site images with verified HQ originals'
+          git push
