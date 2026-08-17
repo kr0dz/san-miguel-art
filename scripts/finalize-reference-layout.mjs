@@ -6,8 +6,9 @@ const OUT=path.join(ROOT,'dist');
 const data=JSON.parse(await readFile(path.join(ROOT,'data/site-v5.json'),'utf8'));
 
 function addFinalCss(html){
-  if(html.includes('/assets/css/reference-final.css')) return html;
-  return html.replace('</head>','<link rel="stylesheet" href="/assets/css/reference-final.css"></head>');
+  if(!html.includes('/assets/css/reference-final.css')) html=html.replace('</head>','<link rel="stylesheet" href="/assets/css/reference-final.css"></head>');
+  if(!html.includes('/assets/brand/favicon.svg')) html=html.replace('</head>','<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg"><link rel="shortcut icon" href="/assets/brand/favicon.svg"></head>');
+  return html;
 }
 
 function sectionBlocks(inside){
@@ -32,13 +33,8 @@ function fixedReferenceOrder(html,p){
   const artist=enabled('artist') ? one('artist-place')+one('ref-faq') : '';
   const closing=enabled('closing') ? one('ref-final') : '';
 
-  // Supplemental CMS sections that are not part of the approved reference composition stay editable,
-  // but are placed after the artist block so they cannot break the reference rhythm.
   const known=new Set(['services','portfolio','murals','process','artist','closing']);
-  const supplements=(p.sections||[]).filter(s=>!known.has(s.id)&&s.enabled!==false).map(s=>{
-    if(s.id==='videos') return blocks.find(x=>x.html.includes(`data-section="${s.id}"`))?.html||'';
-    return blocks.find(x=>x.html.includes(`data-section="${s.id}"`))?.html||'';
-  }).filter(Boolean).join('');
+  const supplements=(p.sections||[]).filter(s=>!known.has(s.id)&&s.enabled!==false).map(s=>blocks.find(x=>x.html.includes(`data-section="${s.id}"`))?.html||'').filter(Boolean).join('');
 
   return before+hero+services+portfolio+murals+process+artist+supplements+closing+after;
 }
@@ -53,4 +49,4 @@ async function processPage(key,p){
 }
 
 for(const [key,p] of Object.entries(data.pages)) await processPage(key,p);
-console.log('SMArt: finalized approved reference proportions and home section order.');
+console.log('SMArt: finalized approved reference proportions, home section order and favicon.');
