@@ -92,6 +92,38 @@
       },
       "sections": [
         {
+          "id": "portfolio",
+          "type": "gallery",
+          "enabled": true,
+          "eyebrow": "Portafolio",
+          "title": "La prueba está en el muro.",
+          "body": "Proyectos para entender escala, detalle y distintas posibilidades de trabajo por encargo.",
+          "mode": "editorial",
+          "items": [
+            {
+              "title": "Mural de paisaje",
+              "kicker": "Murales personalizados",
+              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/atardecer-board.webp",
+              "alt": "Mural de paisaje al atardecer",
+              "cta": "Cotizar algo similar"
+            },
+            {
+              "title": "Intervención contemporánea",
+              "kicker": "Proyecto por encargo",
+              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/abstract-board.webp",
+              "alt": "Intervención mural contemporánea de gran formato",
+              "cta": "Solicitar una comisión"
+            },
+            {
+              "title": "Mural arquitectónico",
+              "kicker": "Muralismo",
+              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/parroquia-board.webp",
+              "alt": "Mural arquitectónico inspirado en San Miguel de Allende",
+              "cta": "Cotizar un mural"
+            }
+          ]
+        },
+        {
           "id": "services",
           "type": "services",
           "enabled": true,
@@ -126,38 +158,6 @@
               "body": "Murales, rótulos e intervenciones para proyectos que necesitan una identidad visual propia.",
               "href": "/murales-hoteles-restaurantes-san-miguel-de-allende/",
               "cta": "Ver servicio comercial"
-            }
-          ]
-        },
-        {
-          "id": "portfolio",
-          "type": "gallery",
-          "enabled": true,
-          "eyebrow": "Portafolio",
-          "title": "La prueba está en el muro.",
-          "body": "Proyectos para entender escala, detalle y distintas posibilidades de trabajo por encargo.",
-          "mode": "editorial",
-          "items": [
-            {
-              "title": "Mural de paisaje",
-              "kicker": "Murales personalizados",
-              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/atardecer-board.webp",
-              "alt": "Mural de paisaje al atardecer",
-              "cta": "Cotizar algo similar"
-            },
-            {
-              "title": "Intervención contemporánea",
-              "kicker": "Proyecto por encargo",
-              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/abstract-board.webp",
-              "alt": "Intervención mural contemporánea de gran formato",
-              "cta": "Solicitar una comisión"
-            },
-            {
-              "title": "Mural arquitectónico",
-              "kicker": "Muralismo",
-              "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/parroquia-board.webp",
-              "alt": "Mural arquitectónico inspirado en San Miguel de Allende",
-              "cta": "Cotizar un mural"
             }
           ]
         },
