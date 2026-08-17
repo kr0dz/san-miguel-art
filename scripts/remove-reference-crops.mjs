@@ -1,39 +1,15 @@
-import {readFile,writeFile} from 'node:fs/promises';
-import path from 'node:path';
+import fs from 'node:fs/promises';
 
-const OUT=path.join(process.cwd(),'dist');
+const targets = ['dist/index.html', 'dist/en/index.html'];
+const img = (src, alt, pos = '50% 50%') => `<img class="hq-img" src="${src}" alt="${alt}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:${pos};display:block">`;
+const botanical = `<svg viewBox="0 0 720 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustración botánica" style="width:100%;height:100%;display:block"><g fill="none" stroke="#9a765d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity=".68"><path d="M85 290C205 235 265 151 330 55"/><path d="M292 104c-56-56-106-45-133-11 49 9 91 18 133 11Z"/><path d="M332 78c29-58 74-70 113-53-28 36-65 53-113 53Z"/><path d="M255 158c-63-38-108-12-127 26 48-7 88-14 127-26Z"/><path d="M369 136c44-59 96-52 126-20-45 22-84 28-126 20Z"/><path d="M200 215c-59-17-91 12-99 47 38-13 70-27 99-47Z"/><path d="M405 188c55-41 102-22 123 14-47 6-85 2-123-14Z"/><path d="M463 260c69-47 124-28 151 7-57 9-106 6-151-7Z"/></g><g fill="#b46d48" opacity=".25"><path d="M332 78c29-58 74-70 113-53-28 36-65 53-113 53Z"/><path d="M369 136c44-59 96-52 126-20-45 22-84 28-126 20Z"/><path d="M463 260c69-47 124-28 151 7-57 9-106 6-151-7Z"/></g></svg>`;
 
-const local=p=>`/assets/images/fernando/${p}`;
-const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function photo(src,alt,caption=''){
-  return `<figure class="figure ref-crop hq-media"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async">${caption?`<figcaption>${esc(caption)}</figcaption>`:''}</figure>`;
+for (const file of targets) {
+  let html = await fs.readFile(file, 'utf8');
+  html = html.replace(/<div class="ref-art" role="img" aria-label="Proyecto de mural exterior"><\/div>/g, img('/images/mural-interior-terminado.avif', 'Proyecto mural terminado'));
+  html = html.replace(/<div class="ref-art" role="img" aria-label="Rótulo pintado a mano"><\/div>/g, img('/images/fernando-castaneda-mural-contemporaneo.avif', 'Detalle de pintura mural'));
+  html = html.replace(/<div class="ref-art" role="img" aria-label="San Miguel de Allende"><\/div>/g, img('/images/fernando-castaneda-parroquia-san-miguel.avif', 'Mural inspirado en San Miguel de Allende', '50% 48%'));
+  html = html.replace(/<div class="ref-art" role="img" aria-label="Ilustración botánica"><\/div>/g, botanical);
+  await fs.writeFile(file, html);
 }
-const botanical=`<figure class="figure ref-crop hq-media botanical-hq" aria-label="Ilustración botánica decorativa"><svg viewBox="0 0 900 430" role="img" aria-hidden="true"><g fill="none" stroke="#a85d43" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" opacity=".92"><path d="M730 430C650 345 617 271 634 191c12-57 45-105 99-145M637 251c-62-15-111-50-143-104M647 220c58-37 99-84 124-142M594 169c-48-7-90-28-126-65M678 145c51-31 88-69 112-114M641 310c-50 8-96-2-139-30M679 337c47-15 88-41 122-78"/><path d="M495 147c25 2 46-9 62-32-28-7-50 4-62 32Zm-27-43c21 2 38-7 52-27-24-6-42 3-52 27Zm304-26c-23 2-41-7-55-27 25-6 44 3 55 27Zm-269 202c28-1 50 11 67 35-31 7-54-5-67-35Zm294-21c-27 0-48 12-64 36 30 6 52-6 64-36Z"/></g><g fill="#a85d43" opacity=".65"><circle cx="634" cy="191" r="4"/><circle cx="641" cy="310" r="4"/><circle cx="679" cy="337" r="4"/></g></svg></figure>`;
-
-async function patch(rel){
-  const file=path.join(OUT,rel);
-  let html=await readFile(file,'utf8');
-
-  // The fourth project used a tiny crop from the reference screenshot.
-  html=html.replace(/(<article class="ref-project">\s*)<figure class="figure ref-crop"[^>]*>[\s\S]*?<\/figure>(\s*<div><small>Casa particular<\/small>)/,
-    `$1${photo(local('interior-board.webp'),'Intervención mural interior de gran formato')}$2`);
-
-  // Keep the exact sign-block geometry, but use a real artwork file instead of the screenshot sprite.
-  html=html.replace(/(<section class="ref-split sign-block">[\s\S]*?<div class="ref-split-art">)[\s\S]*?(<\/div><\/section>)/,
-    `$1${photo(local('abstract-board.webp'),'Intervención pictórica contemporánea en un espacio comercial')}$2`);
-
-  // Replace the remaining San Miguel screenshot crop with a real high-resolution mural image.
-  html=html.replace(/(<div class="place-photo">)[\s\S]*?(<\/div><div class="place-copy">)/,
-    `$1${photo(local('parroquia-board.webp'),'Mural inspirado en la arquitectura de San Miguel de Allende')}$2`);
-
-  // The botanical element is decorative; render it as vector so it stays perfectly sharp at every size.
-  html=html.replace(/(<div class="manifesto-art">)[\s\S]*?(<\/div><\/section>)/,
-    `$1${botanical}$2`);
-
-  if(!html.includes('botanical-hq')) throw new Error(`Reference crop cleanup did not apply to ${rel}`);
-  await writeFile(file,html,'utf8');
-}
-
-await patch('index.html');
-await patch(path.join('en','index.html'));
-console.log('Removed remaining screenshot-based image crops without changing layout geometry.');
+console.log('SMArt: removed remaining low-resolution reference-image crops.');
