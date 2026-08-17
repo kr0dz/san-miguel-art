@@ -1,15 +1,24 @@
 {
-  "version": 2,
+  "version": 3,
   "seo": {
     "title": "Murales, Rótulos y Pintura por Encargo en San Miguel de Allende | SMArt",
     "description": "Contrata murales personalizados, rótulos pintados a mano, pintura por encargo y comisiones artísticas en San Miguel de Allende para residencias, hoteles, restaurantes y negocios."
   },
+  "navigation": {
+    "tagline": "San Miguel de Allende · Servicios artísticos",
+    "ctaLabel": "Cotizar proyecto"
+  },
+  "design": {
+    "theme": "ivory",
+    "heroLayout": "editorial"
+  },
+  "sectionOrder": ["hero", "services", "works", "process", "murals", "artist", "videos", "closing"],
   "hero": {
     "enabled": true,
     "mode": "single",
     "eyebrow": "Murales · Rótulos · Comisiones · San Miguel de Allende",
-    "title": "Murales y pintura por encargo para espacios con identidad.",
-    "body": "Creamos murales personalizados, pintura por encargo y proyectos artísticos para residencias, hoteles, restaurantes y negocios en San Miguel de Allende. También desarrollamos rótulos pintados a mano y comisiones creadas para un espacio específico.",
+    "title": "Arte hecho para transformar espacios.",
+    "body": "Murales personalizados, rótulos pintados a mano y pintura por encargo para residencias, hoteles, restaurantes y negocios en San Miguel de Allende.",
     "primaryLabel": "Ver murales",
     "secondaryLabel": "Cotizar un proyecto",
     "images": [
@@ -20,19 +29,55 @@
       }
     ]
   },
+  "services": {
+    "enabled": true,
+    "eyebrow": "Servicios artísticos",
+    "title": "No vendemos una fórmula. Creamos para el lugar.",
+    "body": "Cada servicio parte del espacio, la intención y el tipo de cliente. Puedes contratar una intervención completa o comenzar con una idea todavía abierta.",
+    "items": [
+      {
+        "kicker": "01 · Muralismo",
+        "title": "Murales personalizados",
+        "body": "Interiores, patios y gran formato para residencias, hoteles, restaurantes y espacios comerciales.",
+        "href": "/murales-san-miguel-de-allende/",
+        "cta": "Ver murales"
+      },
+      {
+        "kicker": "02 · Lettering",
+        "title": "Rótulos pintados a mano",
+        "body": "Letreros, lettering, señalización artística y pintura de identidad para negocios y hospitalidad.",
+        "href": "/rotulos-san-miguel-de-allende/",
+        "cta": "Ver rótulos"
+      },
+      {
+        "kicker": "03 · Comisiones",
+        "title": "Pintura por encargo",
+        "body": "Piezas personalizadas desarrolladas para un espacio, una referencia o una intención estética concreta.",
+        "href": "/pintura-por-encargo-san-miguel-de-allende/",
+        "cta": "Solicitar comisión"
+      },
+      {
+        "kicker": "04 · Comercial",
+        "title": "Hoteles y restaurantes",
+        "body": "Murales, rótulos e intervenciones para proyectos que necesitan una identidad visual propia.",
+        "href": "/murales-hoteles-restaurantes-san-miguel-de-allende/",
+        "cta": "Ver servicio comercial"
+      }
+    ]
+  },
   "works": {
     "enabled": true,
     "mode": "gallery",
     "eyebrow": "Portafolio",
-    "title": "Proyectos que transforman el espacio.",
-    "body": "Una selección de murales e intervenciones para mostrar escala, detalle y distintas posibilidades de trabajo por encargo.",
+    "title": "La prueba está en el muro.",
+    "body": "Una selección de proyectos para entender escala, detalle y distintas posibilidades de trabajo por encargo.",
     "items": [
       {
         "title": "Mural de paisaje",
         "kicker": "Murales personalizados",
         "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/atardecer-board.webp",
         "alt": "Mural de paisaje al atardecer",
-        "cta": "Cotizar un proyecto similar"
+        "cta": "Cotizar algo similar"
       },
       {
         "title": "Intervención contemporánea",
@@ -50,22 +95,36 @@
       }
     ]
   },
+  "process": {
+    "enabled": true,
+    "eyebrow": "Cómo trabajamos",
+    "title": "De una pared vacía a una propuesta concreta.",
+    "body": "No necesitas llegar con todo resuelto. Una foto, medidas aproximadas y una referencia son suficientes para empezar.",
+    "ctaLabel": "Cotizar mi proyecto",
+    "steps": [
+      {"title": "Comparte el espacio", "body": "Fotografías, medidas aproximadas, ubicación y tipo de proyecto."},
+      {"title": "Definimos la dirección", "body": "Mural, rótulo, pintura por encargo o una combinación de servicios."},
+      {"title": "Recibes una propuesta", "body": "Se revisan alcance, complejidad, tiempos y siguientes pasos."}
+    ]
+  },
   "murals": {
     "enabled": true,
-    "mode": "gallery",
-    "eyebrow": "Servicio de murales en San Miguel de Allende",
-    "title": "Del muro vacío a una pieza hecha para ese lugar.",
-    "body": "Murales interiores y proyectos de gran formato para casas, hoteles, restaurantes y espacios comerciales. La propuesta se desarrolla según el muro, la arquitectura, el estilo y la intención del proyecto.",
+    "mode": "beforeAfter",
+    "eyebrow": "Murales por encargo",
+    "title": "La arquitectura también puede formar parte de la obra.",
+    "body": "Intervenciones para casas, hoteles, restaurantes y espacios comerciales. La propuesta se desarrolla para el muro, la luz, la escala y el carácter del lugar.",
+    "primaryLabel": "Ver servicio de murales",
+    "secondaryLabel": "Cotizar un mural",
     "images": [
       {
         "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/interior-board.webp",
         "alt": "Proceso de intervención mural interior",
-        "caption": "Proceso mural"
+        "caption": "Proceso"
       },
       {
         "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/interior-board.webp",
         "alt": "Resultado de intervención mural interior",
-        "caption": "Proyecto terminado"
+        "caption": "Resultado"
       }
     ]
   },
@@ -75,6 +134,7 @@
     "eyebrow": "Artista y ejecución",
     "title": "Fernando Castañeda",
     "body": "Pintura, muralismo e intervenciones de gran formato aplicadas a proyectos por encargo. El portafolio funciona como punto de partida para desarrollar una propuesta adecuada al espacio y al cliente.",
+    "ctaLabel": "Ver portafolio",
     "images": [
       {
         "src": "https://raw.githubusercontent.com/kr0dz/san-miguel-art/main/assets/images/fernando/artist.webp",
@@ -86,8 +146,15 @@
   "videos": {
     "enabled": true,
     "eyebrow": "Proceso en video",
-    "title": "Así se construye un proyecto por encargo.",
+    "title": "Ver cómo se construye una intervención.",
     "body": "Procesos de muralismo, pintura en sitio y proyectos personalizados.",
     "items": []
+  },
+  "closing": {
+    "enabled": true,
+    "eyebrow": "Murales · Rótulos · Comisiones",
+    "title": "¿Qué quieres transformar?",
+    "body": "Mándanos una foto del espacio y una idea, aunque todavía esté incompleta. Te orientamos hacia el servicio adecuado.",
+    "ctaLabel": "Hablar por WhatsApp"
   }
 }
