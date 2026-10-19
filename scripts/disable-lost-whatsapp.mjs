@@ -23,6 +23,18 @@ function injectNotice(value){
   return value.replace(/(<body\b[^>]*>)/i,(_,open)=>open+notice(en));
 }
 
+
+const relatedStyle='<style id="smart-related-site-style">.smart-related-site{background:#f5f3ee;color:#293d33;padding:28px clamp(20px,5vw,70px);border-top:1px solid #d8d4cc}.smart-related-site-inner{max-width:1050px;margin:auto}.smart-related-site h2{font-size:clamp(21px,2.7vw,31px);margin:0 0 8px;line-height:1.2}.smart-related-site p{font:15px/1.7 system-ui,sans-serif;margin:0;max-width:820px}.smart-related-site a{font-weight:700;color:#27614d;text-decoration:underline;text-underline-offset:3px}</style>';
+function addRelatedSite(value, file){
+  const rel=file.replaceAll('\\','/');
+  if (!rel.endsWith('/dist/index.html') && !rel.endsWith('/dist/en/index.html') && rel !== 'dist/index.html' && rel !== 'dist/en/index.html')return value;
+  const en=rel.endsWith('/en/index.html');
+  const copy=en
+    ? '<section class="smart-related-site" aria-label="Related local services"><div class="smart-related-site-inner"><h2>Planning more for your space?</h2><p>For other local services in San Miguel de Allende, from event planning to practical support, explore the <a href="https://escribeme.com.mx/en">Escríbeme local services guide</a>.</p></div></section>'
+    : '<section class="smart-related-site" aria-label="Servicios locales complementarios"><div class="smart-related-site-inner"><h2>¿Tu espacio necesita algo más?</h2><p>Para conocer otros servicios locales en San Miguel de Allende, desde eventos hasta asistencia para tu propiedad o negocio, explora <a href="https://escribeme.com.mx/">la guía de servicios Escríbeme</a>.</p></div></section>';
+  return value.replace('</head>',relatedStyle+'</head>').replace('</main>',copy+'</main>');
+}
+
 for (const path of files(root)) {
   if (!/\.(html|js|json|css)$/i.test(path)) continue;
   let value=readFileSync(path,'utf8');
@@ -31,5 +43,6 @@ for (const path of files(root)) {
     value=value.replace('</head>',css+noticeStyles+'</head>');
     value=injectNotice(value);
   }
+  if(path.endsWith('.html'))value=addRelatedSite(value,path);
   writeFileSync(path,value);
 }
