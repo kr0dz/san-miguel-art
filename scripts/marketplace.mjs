@@ -10,10 +10,10 @@ const abs=p=>`https://sanmigueldeallende.art${p}`;
 const publishedArtists=(market.artists||[]).filter(x=>x.published!==false);
 const publishedWorks=(market.works||[]).filter(x=>x.published!==false);
 const artistById=id=>publishedArtists.find(a=>a.id===id)||{};
-const wa=site.globals?.whatsapp||'447915374776';
+const wa='';
 const tag=site.globals?.whatsappTag||'ART';
 
-function whatsapp(text){return `https://wa.me/${wa}?text=${encodeURIComponent(`${text}\n\n[${tag}]`)}`}
+function whatsapp(text){return '#';}
 function commonHead({lang='es-MX',title,description,pathname,type='website',schema={}}){
  const en=lang.startsWith('en');
  return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><link rel="canonical" href="${abs(pathname)}"><meta property="og:type" content="${esc(type)}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${abs(pathname)}"><link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg"><link rel="shortcut icon" href="/assets/brand/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/css/v5.css"><link rel="stylesheet" href="/assets/css/reference.css"><link rel="stylesheet" href="/assets/css/reference-final.css"><link rel="stylesheet" href="/assets/css/marketplace.css"><script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org',...schema}).replace(/</g,'\\u003c')}</script></head>`;
