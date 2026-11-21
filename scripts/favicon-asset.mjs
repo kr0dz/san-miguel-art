@@ -20,9 +20,9 @@ async function htmlFiles(dir) {
 let changed = 0;
 for (const file of await htmlFiles('dist')) {
   let html = await readFile(file, 'utf8');
-  if (!/<head\\b/i.test(html) || !/<\\/head>/i.test(html)) continue;
-  html = html.replace(/<link\\b[^>]*\\brel=["'](?:icon|shortcut icon|apple-touch-icon)["'][^>]*>/gi, '');
-  html = html.replace(/<\\/head>/i, links + '</head>');
+  if (!/<head\b/i.test(html) || !/<\/head>/i.test(html)) continue;
+  html = html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon)["'][^>]*>/gi, '');
+  html = html.replace(/<\/head>/i, links + '</head>');
   await writeFile(file, html, 'utf8');
   changed++;
 }
