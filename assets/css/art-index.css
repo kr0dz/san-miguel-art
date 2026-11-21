@@ -469,3 +469,15 @@ body.sm-edition .market-page a.artist-link {color:var(--sm-acid)}
     padding:14px 0 15px;
   }
 }
+
+
+/* Artist spotlight: dark graphite instead of saturated ultramarine.
+   Keep artwork photography and the original gallery typography untouched. */
+body.sm-edition .sm-artist{background:var(--sm-ink);color:var(--sm-white)}
+body.sm-edition .sm-artist-photo{background:#242426}
+body.sm-edition .sm-artist .sm-kicker{color:var(--sm-coral)}
+body.sm-edition .sm-artist h2,
+body.sm-edition .sm-artist h2 em{color:var(--sm-white)}
+body.sm-edition .sm-artist p{color:#E8E4DF}
+body.sm-edition .sm-artist a{background:var(--sm-white);color:var(--sm-ink)}
+body.sm-edition .sm-artist a:hover{background:#E7E4FC}

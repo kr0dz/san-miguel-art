@@ -82,7 +82,7 @@ function enhance(html,en,isHome){
  (all,before,after)=>before+`<a class="sm-nav-contact" href="${mail+encodeURIComponent(t(en,'Consulta de arte','Art inquiry'))}">${t(en,'Contacto','Contact')}${icon}</a>`+after);
  html=html.replace(/(<button class="menu"[^>]*>)[\s\S]*?(<\/button>)/,(all,open,close)=>open.replace('<button ','<button aria-expanded="false" aria-controls="smart-mobile-nav" ')+'<span class="menu-bars" aria-hidden="true"><i></i><i></i></span>'+close);
  html=html.replace(/<nav class="mobile-nav"/,'<nav class="mobile-nav" id="smart-mobile-nav" aria-label="Mobile navigation"');
- html=html.replace('</head>','<link rel="stylesheet" href="/assets/css/art-index.css?v=mobile-fix-20261121">'+(isHome?'<link rel="preload" as="image" href="/images/fernando-castaneda-mural-contemporaneo.avif">':'')+'</head>');
+ html=html.replace('</head>','<link rel="stylesheet" href="/assets/css/art-index.css?v=artist-charcoal-20261121">'+(isHome?'<link rel="preload" as="image" href="/images/fernando-castaneda-mural-contemporaneo.avif">':'')+'</head>');
  html=html.replace('src="/assets/js/site-v5.js"','src="/assets/js/site-v5.js?v=mobile-fix-20261121"');
  html=html.replace('</body>','<script src="/assets/js/art-index.js?v=mobile-fix-20261121" defer></script></body>');
  if(isHome){
