@@ -37,16 +37,16 @@ function home(en){
       <span class="sm-stage-sticker">SM<br>ART<br>INDEX</span><span class="sm-stage-vertical">SAN MIGUEL DE ALLENDE · ART</span>
     </div>
   </section>
-  <div class="sm-index-strip"><span>SMArt / 001</span><span class="sm-dot" aria-hidden="true"></span><span>${t(en,'OTRA FORMA DE DESCUBRIR ARTE','A DIFFERENT WAY TO DISCOVER ART')}</span><span class="sm-dot" aria-hidden="true"></span><span>SAN MIGUEL DE ALLENDE, MX</span></div>
+  <div class="sm-index-strip"><span>SMArt / 001</span><span class="sm-dot" aria-hidden="true"></span><span>${t(en,'OBRAS · ARTISTAS · MURALES','ARTWORKS · ARTISTS · MURALS')}</span><span class="sm-dot" aria-hidden="true"></span><span>SAN MIGUEL DE ALLENDE, MX</span></div>
   <section class="sm-intro" aria-labelledby="sm-intro-title">
     <div class="sm-intro-side"><span class="sm-kicker">${t(en,'01 / LA IDEA','01 / THE IDEA')}</span><span class="sm-index" aria-hidden="true">01</span></div>
-    <div class="sm-intro-content"><h2 id="sm-intro-title">${t(en,'Aquí el arte','Every work')}<br><span>${t(en,'tiene nombre.','has a name.')}</span></h2>
-      <p>${t(en,'Detrás de cada obra hay alguien que la creó. SMArt reúne artistas, pinturas y proyectos de San Miguel de Allende en un mismo lugar.','Behind every work is an artist. SMArt presents artists, artworks and projects connected to San Miguel de Allende in one place.')}</p>
+    <div class="sm-intro-content"><h2 id="sm-intro-title">${t(en,'Artistas de','Artists in')}<br><span>${t(en,'San Miguel.','San Miguel.')}</span></h2>
+      <p>${t(en,'Consulta las obras publicadas y conoce a sus autores. También encontrarás murales y proyectos de pintura por encargo en San Miguel de Allende.','Explore the listed artworks and their artists. You can also find murals and commissioned painting projects in San Miguel de Allende.')}</p>
       <a class="sm-arrow" href="${en?'/en/artists/':'/artistas/'}">${t(en,'Descubre a los artistas','Discover the artists')}${icon}</a>
     </div>
   </section>
   <section class="sm-gallery" aria-labelledby="sm-gallery-title">
-    <div class="sm-gallery-top"><div><span class="sm-kicker">${t(en,'02 / LA SELECCIÓN','02 / THE SELECTION')}</span><h2 id="sm-gallery-title">${t(en,'Míralo','Worth')}<br><em>${t(en,'de cerca.','a closer look.')}</em></h2></div>
+    <div class="sm-gallery-top"><div><span class="sm-kicker">${t(en,'02 / LA SELECCIÓN','02 / THE SELECTION')}</span><h2 id="sm-gallery-title">${t(en,'Obras','Featured')}<br><em>${t(en,'destacadas.','artworks.')}</em></h2></div>
       <a class="sm-arrow" href="${en?'/en/artworks/':'/obras/'}">${t(en,'Ver todas las obras','View all artworks')}${icon}</a>
     </div><div class="sm-gallery-grid">${works.slice(0,8).map((w,i)=>card(w,i,en)).join('')}</div>
   </section>
@@ -60,8 +60,8 @@ function home(en){
   </section>`:''}
   <section class="sm-scope" aria-labelledby="sm-scope-title">
     <span class="sm-kicker">${t(en,'04 / QUÉ ENCUENTRAS','04 / WHAT YOU CAN FIND')}</span>
-    <div class="sm-scope-heading"><h2 id="sm-scope-title">${t(en,'Arte a tu manera.','Art, in every form.')}</h2>
-      <p>${t(en,'Una obra que te gusta, un mural para tu espacio o una idea por desarrollar. Hay distintas formas de encontrar arte aquí.','From a single artwork to a mural created for a space: discover the different ways to work with SMArt.')}</p></div>
+    <div class="sm-scope-heading"><h2 id="sm-scope-title">${t(en,'Obras y encargos.','Artworks and commissions.')}</h2>
+      <p>${t(en,'Explora las obras del catálogo o consulta un proyecto de mural o pintura por encargo.','Browse the catalog or inquire about a mural or commissioned painting.')}</p></div>
     <div class="sm-scope-grid">${services}</div>
   </section>
   <section class="sm-quiet" aria-labelledby="sm-ending-title">
@@ -71,7 +71,7 @@ function home(en){
       <a class="sm-arrow" href="${mail+encodeURIComponent(t(en,'Consulta sobre arte — SMArt','Art inquiry — SMArt'))}">${t(en,'Contactar a SMArt','Contact SMArt')}${icon}</a>
     </div>
   </section>
-  <div class="sm-credit"><span>SMArt / SAN MIGUEL DE ALLENDE</span><span>${t(en,'ARTE LOCAL. PERSONAS REALES.','LOCAL ART. REAL PEOPLE.')}</span></div>
+  <div class="sm-credit"><span>SMArt / SAN MIGUEL DE ALLENDE</span><span>${t(en,'PINTURA · MURALES · ENCARGOS','PAINTING · MURALS · COMMISSIONS')}</span></div>
 </main>`;
 }
 function enhance(html,en,isHome){
@@ -82,6 +82,8 @@ function enhance(html,en,isHome){
  (all,before,after)=>before+`<a class="sm-nav-contact" href="${mail+encodeURIComponent(t(en,'Consulta de arte','Art inquiry'))}">${t(en,'Contacto','Contact')}${icon}</a>`+after);
  html=html.replace(/(<button class="menu"[^>]*>)[\s\S]*?(<\/button>)/,(all,open,close)=>open.replace('<button ','<button aria-expanded="false" aria-controls="smart-mobile-nav" ')+'<span class="menu-bars" aria-hidden="true"><i></i><i></i></span>'+close);
  html=html.replace(/<nav class="mobile-nav"/,'<nav class="mobile-nav" id="smart-mobile-nav" aria-label="Mobile navigation"');
+ html=html.replace(/<link\b[^>]*\brel=["'](?:icon|shortcut icon|apple-touch-icon)["'][^>]*>/gi,'');
+ html=html.replace('</head>','<link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg?v=sm20261121"><link rel="icon" type="image/png" sizes="64x64" href="/assets/brand/smart-favicon.png?v=sm20261121"><link rel="shortcut icon" href="/assets/brand/smart-favicon.png?v=sm20261121"><link rel="apple-touch-icon" href="/assets/brand/smart-favicon.png?v=sm20261121"></head>');
  html=html.replace('</head>','<link rel="stylesheet" href="/assets/css/art-index.css?v=artist-charcoal-20261121">'+(isHome?'<link rel="preload" as="image" href="/images/fernando-castaneda-mural-contemporaneo.avif">':'')+'</head>');
  html=html.replace('src="/assets/js/site-v5.js"','src="/assets/js/site-v5.js?v=mobile-fix-20261121"');
  html=html.replace('</body>','<script src="/assets/js/art-index.js?v=mobile-fix-20261121" defer></script></body>');
