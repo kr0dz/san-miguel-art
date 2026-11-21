@@ -11,12 +11,18 @@
       "slug": "fernando-castaneda",
       "name": "Fernando Castañeda",
       "city": "San Miguel de Allende",
-      "disciplines": ["Pintura", "Muralismo", "Proyectos por encargo"],
+      "disciplines": [
+        "Pintura",
+        "Muralismo",
+        "Proyectos por encargo"
+      ],
       "bioEs": "Pintura, muralismo e intervenciones de gran formato presentadas en SMArt. Su portafolio funciona como punto de partida para obra, proyectos por encargo y colaboraciones con espacios.",
       "bioEn": "Painting, muralism and large-format interventions presented through SMArt. The portfolio is a starting point for artwork, commissions and collaborations with spaces.",
       "image": "/images/fernando-castaneda-muralista.avif",
       "featured": true,
-      "published": true
+      "published": true,
+      "imageAltEs": "Artista trabajando en una intervención de pintura mural",
+      "imageAltEn": "Artist working on a mural painting project"
     }
   ],
   "works": [
