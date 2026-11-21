@@ -9,20 +9,8 @@ const files = directory => readdirSync(directory).flatMap(name => {
 });
 const css = '<style id="retired-whatsapp-contact">a[href*="wa.me/"],a[href*="api.whatsapp.com/send"],.whatsapp,[data-smart-whatsapp],[data-wa-general],[data-interest],.jsq,#f,.modal:has(#f){display:none!important}</style>';
 
-const noticeStyles = '<style id="contact-service-notice-style">.contact-service-notice{background:#f3f1ec;color:#35332e;border-bottom:1px solid #d8d4cb;padding:12px 18px;text-align:center;font:13px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.contact-service-notice strong{font-weight:700}.contact-service-notice a{font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}</style>';
-const email='sanmigueldeallendetech@gmail.com';
-function notice(en){
-  const message=en
-    ? 'We no longer have access to our previous WhatsApp number. We apologize for the inconvenience. Please email us at'
-    : 'Ya no tenemos acceso a nuestro número anterior de WhatsApp. Lamentamos las molestias. Puedes escribirnos por correo a';
-  const heading=en?'Important notice.':'Aviso importante.';
-  return '<aside class="contact-service-notice" role="status"><strong>'+heading+'</strong> '+message+' <a href="mailto:'+email+'">'+email+'</a>.</aside>';
-}
-function injectNotice(value){
-  const en=/<html\b[^>]*lang=["']en(?:-|["'])/i.test(value);
-  return value.replace(/(<body\b[^>]*>)/i,(_,open)=>open+notice(en));
-}
-
+// Keep retired WhatsApp controls disabled without showing a disruptive sitewide banner.
+// The active email contact remains available in navigation and on the contact page.
 
 const relatedStyle='<style id="smart-related-site-style">.smart-related-site{background:#f5f3ee;color:#293d33;padding:28px clamp(20px,5vw,70px);border-top:1px solid #d8d4cc}.smart-related-site-inner{max-width:1050px;margin:auto}.smart-related-site h2{font-size:clamp(21px,2.7vw,31px);margin:0 0 8px;line-height:1.2}.smart-related-site p{font:15px/1.7 system-ui,sans-serif;margin:0;max-width:820px}.smart-related-site a{font-weight:700;color:#27614d;text-decoration:underline;text-underline-offset:3px}</style>';
 function addRelatedSite(value, file){
@@ -40,8 +28,7 @@ for (const path of files(root)) {
   let value=readFileSync(path,'utf8');
   value=value.replaceAll('447915374776','');
   if (path.endsWith('.html') && !value.includes('id="retired-whatsapp-contact"')) {
-    value=value.replace('</head>',css+noticeStyles+'</head>');
-    value=injectNotice(value);
+    value=value.replace('</head>',css+'</head>');
   }
   if(path.endsWith('.html'))value=addRelatedSite(value,path);
   writeFileSync(path,value);
