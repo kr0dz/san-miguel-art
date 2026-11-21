@@ -469,3 +469,21 @@ body.sm-edition .market-page a.artist-link {color:var(--sm-acid)}
     padding:14px 0 15px;
   }
 }
+
+
+/* Dark editorial introduction: graphite frames the story before the light artwork grid. */
+body.sm-edition .sm-intro{
+  background:var(--sm-ink);
+  color:var(--sm-white);
+  border-bottom:1px solid rgba(246,243,236,.16);
+}
+body.sm-edition .sm-intro .sm-kicker{color:var(--sm-coral)}
+body.sm-edition .sm-intro .sm-index{color:#4436C5}
+body.sm-edition .sm-intro h2{color:var(--sm-white)}
+body.sm-edition .sm-intro h2 span{color:var(--sm-coral)}
+body.sm-edition .sm-intro p{color:#E8E4DF}
+body.sm-edition .sm-intro a{
+  color:var(--sm-white);
+  border-bottom-color:var(--sm-coral);
+}
+body.sm-edition .sm-intro a:hover{color:var(--sm-coral)}
